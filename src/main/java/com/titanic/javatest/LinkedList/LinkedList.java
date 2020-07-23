@@ -59,4 +59,17 @@ public class LinkedList {
         }
         return -1;
     }
+
+    public int find(Integer data) {
+        Node node = this.head;
+
+        while (node != null) {
+            if (node.getData() == data) {
+                return node.getData();
+            } else {
+                node = node.getNext();
+            }
+        }
+        return -1;
+    }
 }

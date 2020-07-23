@@ -20,9 +20,9 @@ public class LinkedListTest {
         }
     }
 
-    @CsvSource({"11, 12, 8, 20, -1"})
+    @CsvSource({"11, 12"})
     @ParameterizedTest
-    void 링크드리스트의_메서드를_테스트한다(Integer eleven, Integer twelve, Integer eight, Integer twenty, Integer empty) {
+    void 링크드리스트의_add를_테스트한다(Integer eleven, Integer twelve) {
 
         linkedList.add(eleven);
         assertThat(linkedList.getTail().getData()).isEqualTo(eleven);
@@ -30,7 +30,11 @@ public class LinkedListTest {
         assertThat(linkedList.getTail().getData()).isEqualTo(twelve);
 
         linkedList.traverse();
-        System.out.println();
+    }
+
+    @CsvSource({"8, 20, -1"})
+    @ParameterizedTest
+    void 링크드리스트의_delete를_테스트한다(Integer eight, Integer twenty, Integer empty) {
 
         assertThat(linkedList.delete(eight)).isEqualTo(eight);
 
@@ -38,5 +42,19 @@ public class LinkedListTest {
         System.out.println();
 
         assertThat(linkedList.delete(twenty)).isEqualTo(empty);
+
+    }
+
+    @CsvSource({"8, 20, -1"})
+    @ParameterizedTest
+    void 링크드리스트의_find를_테스트한다(Integer eight, Integer twenty, Integer empty) {
+
+        assertThat(linkedList.find(eight)).isEqualTo(eight);
+
+        linkedList.traverse();
+        System.out.println();
+
+        assertThat(linkedList.find(twenty)).isEqualTo(empty);
+
     }
 }
