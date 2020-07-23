@@ -20,7 +20,7 @@ public class LinkedList {
         while (node.getNext() != null) {
             node = node.getNext();
         }
-        node.setNext(new Node(null, data));
+        node.setNext(new Node(data));
     }
 
     public void traverse() {

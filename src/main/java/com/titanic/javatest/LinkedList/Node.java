@@ -2,11 +2,29 @@ package com.titanic.javatest.LinkedList;
 
 public class Node {
 
+    private Node prev;
+    private Integer data;
     private Node next;
-    private int data;
 
-    public Node (Node next, int data) {
-        this.next = next;
+    public Node(int data) {
+        this.prev = null;
+        this.data = data;
+        this.next = null;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
+    }
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
         this.data = data;
     }
 
@@ -16,13 +34,5 @@ public class Node {
 
     public void setNext(Node next) {
         this.next = next;
-    }
-
-    public int getData() {
-        return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
     }
 }

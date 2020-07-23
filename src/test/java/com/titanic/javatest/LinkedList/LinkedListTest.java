@@ -13,7 +13,7 @@ public class LinkedListTest {
 
     @BeforeEach
     void 링크드리스트를_생성한다() {
-        linkedList = new LinkedList(new Node(null, 1));
+        linkedList = new LinkedList(new Node( 1));
 
         for (int i = 2; i < 11; i++) {
             linkedList.add(i);
