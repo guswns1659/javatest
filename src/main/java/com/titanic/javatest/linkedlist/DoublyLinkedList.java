@@ -1,4 +1,4 @@
-package com.titanic.javatest.LinkedList;
+package com.titanic.javatest.linkedlist;
 
 public class DoublyLinkedList {
 

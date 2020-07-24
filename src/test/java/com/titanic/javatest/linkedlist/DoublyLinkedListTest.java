@@ -1,4 +1,4 @@
-package com.titanic.javatest.LinkedList;
+package com.titanic.javatest.linkedlist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
