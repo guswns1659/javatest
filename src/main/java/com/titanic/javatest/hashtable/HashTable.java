@@ -1,19 +1,25 @@
 package com.titanic.javatest.hashtable;
 
+import com.titanic.javatest.linkedlist.DoublyLinkedList;
+import com.titanic.javatest.linkedlist.Node;
+
 import java.util.Arrays;
 
 public class HashTable {
 
-    private String[] bucket;
+    private DoublyLinkedList[] bucket;
 
     public HashTable() {
-        this.bucket = new String[10];
+        this.bucket = new DoublyLinkedList[10];
     }
 
     public String put(String data, String value) {
         int key = getKey(data);
         int hashAddress = getHashAddress(key);
-        return this.bucket[hashAddress] = value;
+
+        Node newNode = new Node(data, value);
+        this.bucket[hashAddress].add(newNode);
+        return value;
     }
 
     public void traverse() {
@@ -31,5 +37,13 @@ public class HashTable {
             key += character;
         }
         return key;
+    }
+
+    public DoublyLinkedList[] getBucket() {
+        return bucket;
+    }
+
+    public void setBucket(DoublyLinkedList[] bucket) {
+        this.bucket = bucket;
     }
 }

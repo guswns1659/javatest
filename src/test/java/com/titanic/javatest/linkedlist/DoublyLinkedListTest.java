@@ -14,27 +14,28 @@ public class DoublyLinkedListTest {
     void 양방향링크드리스트를_생성한다() {
         this.doublyLinkedList = new DoublyLinkedList();
         for (int i = 1; i < 10; i++) {
-            this.doublyLinkedList.add(i);
+            Node newNode = new Node("data" + i, "value" + i);
+            this.doublyLinkedList.add(newNode);
         }
     }
 
-    @CsvSource({"10"})
+    @CsvSource({"Jack, 177"})
     @ParameterizedTest
-    void 양방향링크드리스트의_add를_테스트한다(Integer ten) {
+    void 양방향링크드리스트의_add를_테스트한다(String name, String height) {
 
         doublyLinkedList.traverse();
 
-        assertThat(doublyLinkedList.add(ten)).isEqualTo(ten);
+        assertThat(doublyLinkedList.add(new Node(name, height))).isEqualTo(height);
 
         doublyLinkedList.traverse();
 
     }
 
-    @CsvSource({"10, 9"})
+    @CsvSource({"Jack, 177, data9"})
     @ParameterizedTest
-    void 양방향링크드리스트의_addBefore를_테스트한다(Integer ten, Integer nine) {
+    void 양방향링크드리스트의_addBefore를_테스트한다(String name, String height, String beforeData) {
 
-        assertThat(doublyLinkedList.addBefore(ten, nine)).isEqualTo(ten);
+        assertThat(doublyLinkedList.addBefore(new Node(name, height), beforeData)).isEqualTo(height);
 
         doublyLinkedList.traverse();
     }

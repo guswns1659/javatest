@@ -1,7 +1,7 @@
 package com.titanic.javatest.hashtable;
 
+import com.titanic.javatest.linkedlist.DoublyLinkedList;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,8 +12,11 @@ public class HashTableTest {
     private HashTable hashTable;
 
     @BeforeEach
-    void 해시테이블을_생성한다() {
+    void 체이닝을_적용한_해시테이블을_생성한다() {
         this.hashTable = new HashTable();
+        for (DoublyLinkedList doublyLinkedList : this.hashTable.getBucket()) {
+            doublyLinkedList = new DoublyLinkedList();
+        }
     }
 
     @ParameterizedTest
