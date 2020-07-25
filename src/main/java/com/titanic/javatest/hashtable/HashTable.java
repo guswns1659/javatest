@@ -11,6 +11,10 @@ public class HashTable {
 
     public HashTable() {
         this.bucket = new DoublyLinkedList[10];
+
+        for (int i = 0; i < 10; i++) {
+            this.bucket[i] = new DoublyLinkedList();
+        }
     }
 
     public String put(String data, String value) {
@@ -45,5 +49,12 @@ public class HashTable {
 
     public void setBucket(DoublyLinkedList[] bucket) {
         this.bucket = bucket;
+    }
+
+    @Override
+    public String toString() {
+        return "HashTable{" +
+                "bucket=" + Arrays.toString(bucket) +
+                '}';
     }
 }

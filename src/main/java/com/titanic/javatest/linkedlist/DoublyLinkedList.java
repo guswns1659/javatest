@@ -67,4 +67,12 @@ public class DoublyLinkedList {
     public void setTail(Node tail) {
         this.tail = tail;
     }
+
+    @Override
+    public String toString() {
+        return "DoublyLinkedList{" +
+                "head=" + head +
+                ", tail=" + tail +
+                '}';
+    }
 }
