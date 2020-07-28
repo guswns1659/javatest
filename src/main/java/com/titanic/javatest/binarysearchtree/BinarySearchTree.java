@@ -3,12 +3,14 @@ package com.titanic.javatest.binarysearchtree;
 public class BinarySearchTree {
 
     private TreeNode head;
+    private int size;
 
     public BinarySearchTree(TreeNode head) {
         this.head = head;
+        this.size++;
     }
 
-    public int add(TreeNode newNode) {
+    public boolean add(TreeNode newNode) {
         TreeNode current = this.head;
 
         while (true) {
@@ -17,14 +19,16 @@ public class BinarySearchTree {
                     current = current.getLeft();
                 } else {
                     current.setLeft(newNode);
-                    return newNode.getValue();
+                    this.size++;
+                    return true;
                 }
             } else {
                 if (current.getRight() != null) {
                     current = current.getRight();
                 } else {
                     current.setRight(newNode);
-                    return newNode.getValue();
+                    this.size++;
+                    return true;
                 }
             }
         }
@@ -73,30 +77,33 @@ public class BinarySearchTree {
 
         // 1. 삭제하는 노드의 자식이 없는 경우
         if (current.getLeft() == null && current.getRight() == null) {
-            if (deletingNode.getValue() < parent.getValue()) {
+            if (current.getValue() < parent.getValue()) {
                 parent.setLeft(null);
             } else {
                 parent.setRight(null);
             }
+            this.size--;
             return true;
         }
         // 2. 삭제하는 노드의 자식이 1개인 경우
         // 2-1 삭제하는 노드의 자식이 왼쪽 노드인 경우
         if (current.getLeft() != null && current.getRight() == null) {
-            if (deletingNode.getValue() < parent.getValue()) {
+            if (current.getValue() < parent.getValue()) {
                 parent.setLeft(current.getLeft());
             } else {
                 parent.setRight(current.getLeft());
             }
+            this.size--;
             return true;
         }
         // 2-2 삭제하는 노드의 자식이 오른쪽 노드인 경우
         if (current.getLeft() == null && current.getRight() != null) {
-            if (deletingNode.getValue() < parent.getValue()) {
+            if (current.getValue() < parent.getValue()) {
                 parent.setLeft(current.getRight());
             } else {
                 parent.setRight(current.getRight());
             }
+            this.size--;
             return true;
         }
 
@@ -127,8 +134,13 @@ public class BinarySearchTree {
             if (parent.getRight() != changeNode) {
                 changeNode.setRight(current.getRight());
             }
+            this.size--;
             return true;
         }
         return false;
+    }
+
+    public int size() {
+        return this.size;
     }
 }
