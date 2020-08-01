@@ -33,22 +33,34 @@ public class DoublyLinkedList {
     }
 
     public String addBefore(Node newNode, String beforeData) {
-        Node node = this.tail.getPrev();
+        Node current = this.tail.getPrev();
 
-        while (node.getData().equals("head")) {
-            if (node.getData().equals(beforeData)) {
+        while (!current.getData().equals("head")) {
+            if (current.getData().equals(beforeData)) {
 
-                newNode.setPrev(node.getPrev());
-                newNode.setNext(node);
-                node.getPrev().setNext(newNode);
-                node.setPrev(newNode);
+                newNode.setPrev(current.getPrev());
+                newNode.setNext(current);
+                current.getPrev().setNext(newNode);
+                current.setPrev(newNode);
 
                 return newNode.getValue();
             } else {
-                node = node.getPrev();
+                current = current.getPrev();
             }
         }
 
+        return "fail";
+    }
+
+    public String find(Node foundNode) {
+        Node current = this.head.getNext();
+
+        while (!current.getData().equals("tail")) {
+            if (current.getData().equals(foundNode.getData())) {
+                return foundNode.getValue();
+            }
+            current = current.getNext();
+        }
         return "fail";
     }
 
