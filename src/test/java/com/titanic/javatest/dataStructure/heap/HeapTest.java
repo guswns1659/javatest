@@ -1,4 +1,4 @@
-package com.titanic.javatest.heap;
+package com.titanic.javatest.dataStructure.heap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

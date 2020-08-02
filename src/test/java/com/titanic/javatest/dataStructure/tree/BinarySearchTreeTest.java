@@ -1,4 +1,4 @@
-package com.titanic.javatest.tree;
+package com.titanic.javatest.dataStructure.tree;
 
 import com.titanic.javatest.binarysearchtree.BinarySearchTree;
 import com.titanic.javatest.binarysearchtree.TreeNode;

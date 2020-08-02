@@ -1,4 +1,4 @@
-package com.titanic.javatest.linkedlist;
+package com.titanic.javatest.dataStructure.linkedlist;
 
 public class Node {
 

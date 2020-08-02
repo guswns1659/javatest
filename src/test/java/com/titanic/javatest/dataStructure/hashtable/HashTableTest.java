@@ -1,4 +1,4 @@
-package com.titanic.javatest.hashtable;
+package com.titanic.javatest.dataStructure.hashtable;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

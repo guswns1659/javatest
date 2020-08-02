@@ -1,7 +1,7 @@
-package com.titanic.javatest.hashtable;
+package com.titanic.javatest.dataStructure.hashtable;
 
-import com.titanic.javatest.linkedlist.DoublyLinkedList;
-import com.titanic.javatest.linkedlist.Node;
+import com.titanic.javatest.dataStructure.linkedlist.DoublyLinkedList;
+import com.titanic.javatest.dataStructure.linkedlist.Node;
 
 import java.util.Arrays;
 

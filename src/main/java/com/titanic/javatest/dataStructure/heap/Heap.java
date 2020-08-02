@@ -1,4 +1,4 @@
-package com.titanic.javatest.heap;
+package com.titanic.javatest.dataStructure.heap;
 
 import java.util.ArrayList;
 import java.util.List;
