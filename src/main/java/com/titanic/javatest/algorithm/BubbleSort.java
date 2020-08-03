@@ -3,12 +3,9 @@ package com.titanic.javatest.algorithm;
 import java.util.List;
 
 public class BubbleSort {
-
-
     public void sort(List<Integer> unsortedList) {
 
         int listSize = unsortedList.size();
-
         for (int turn = 0; turn < listSize - 1; turn++) {
             boolean swap = false;
             for (int i = 0; i < listSize - turn - 1; i++) {
@@ -17,7 +14,6 @@ public class BubbleSort {
                     swap = true;
                 }
             }
-
             if (!swap) {
                 break;
             }
