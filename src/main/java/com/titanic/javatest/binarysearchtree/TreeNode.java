@@ -39,4 +39,8 @@ public class TreeNode {
     public void setRight(TreeNode right) {
         this.right = right;
     }
+
+    public boolean isLeftOf(TreeNode current) {
+        return this.value < current.getValue();
+    }
 }

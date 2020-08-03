@@ -14,22 +14,21 @@ public class BinarySearchTree {
         TreeNode current = this.head;
 
         while (true) {
-            if (newNode.getValue() < current.getValue()) {
-                if (current.getLeft() != null) {
-                    current = current.getLeft();
-                } else {
+            if (newNode.isLeftOf(current)) {
+                if (current.getLeft() == null) {
                     current.setLeft(newNode);
                     this.size++;
                     return true;
                 }
+                current = current.getLeft();
+
             } else {
-                if (current.getRight() != null) {
-                    current = current.getRight();
-                } else {
+                if (current.getRight() == null) {
                     current.setRight(newNode);
                     this.size++;
                     return true;
                 }
+                current = current.getRight();
             }
         }
     }
@@ -118,14 +117,14 @@ public class BinarySearchTree {
             // 3-2-1 바뀌는 노드의 자식노드가 없는 경우
             if (changeNode.getRight() == null) {
                 changeParentNode.setLeft(null);
-            // 3-2-2 바뀌는 노드가 오른쪽 자식 노드가 있는 경우
+                // 3-2-2 바뀌는 노드가 오른쪽 자식 노드가 있는 경우
             } else {
                 changeParentNode.setLeft(changeNode.getRight());
             }
             // 3-1 삭제하는 노드가 부모 노드의 왼쪽에 있는 경우
             if (current.getValue() < parent.getValue()) {
                 parent.setLeft(changeNode);
-            // 3-2 삭제하는 노드가 부모 노드의 오른쪽에 있는 경우
+                // 3-2 삭제하는 노드가 부모 노드의 오른쪽에 있는 경우
             } else {
                 parent.setRight(changeNode);
             }
