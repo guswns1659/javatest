@@ -2,82 +2,88 @@ package com.titanic.javatest.dataStructure.linkedlist;
 
 public class DoublyLinkedList {
 
-    private Node head;
-    private Node tail;
+    private LinkedListNode head;
+    private LinkedListNode tail;
+    private int size;
 
     public DoublyLinkedList () {
-        this.head = new Node("head", "null");
-        this.tail = new Node("tail", "null");
+        this.head = new LinkedListNode(null);
+        this.tail = new LinkedListNode(null);
         this.head.setNext(this.tail);
         this.tail.setPrev(this.head);
     }
 
     public void traverse() {
-        Node node = this.head.getNext();
-        while (node.getData().equals("tail")) {
-            System.out.println("node : " + node.getData());
+        LinkedListNode node = this.head.getNext();
+        while (node.isTail()) {
+            System.out.println("node : " + node.getValue());
             node = node.getNext();
         }
         System.out.println();
     }
 
-    public String add(Node newNode) {
-        Node current = this.tail;
+    public boolean add(LinkedListNode newNode) {
+        LinkedListNode current = this.tail;
+        arrangeLink(newNode, current);
+        this.size++;
+        return true;
+    }
 
+    private void arrangeLink(LinkedListNode newNode, LinkedListNode current) {
         newNode.setPrev(current.getPrev());
         newNode.setNext(current);
         current.getPrev().setNext(newNode);
         current.setPrev(newNode);
-
-        return newNode.getValue();
     }
 
-    public String addBefore(Node newNode, String beforeData) {
-        Node current = this.tail.getPrev();
-
-        while (!current.getData().equals("head")) {
-            if (current.getData().equals(beforeData)) {
-
-                newNode.setPrev(current.getPrev());
-                newNode.setNext(current);
-                current.getPrev().setNext(newNode);
-                current.setPrev(newNode);
-
-                return newNode.getValue();
-            } else {
-                current = current.getPrev();
-            }
-        }
-
-        return "fail";
-    }
-
-    public String find(Node foundNode) {
-        Node current = this.head.getNext();
-
-        while (!current.getData().equals("tail")) {
-            if (current.getData().equals(foundNode.getData())) {
-                return foundNode.getValue();
-            }
+    public boolean add(int index, LinkedListNode newNode) {
+        isOutOfIndex(index);
+        LinkedListNode current = this.head.getNext();
+        int startIndex = 0;
+        while (startIndex != index) {
             current = current.getNext();
+            startIndex++;
         }
-        return "fail";
+        arrangeLink(newNode, current);
+        this.size++;
+        return true;
     }
 
-    public Node getHead() {
-        return head;
+    private void isOutOfIndex(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
-    public void setHead(Node head) {
-        this.head = head;
+    public int size() {
+        return this.size;
     }
 
-    public Node getTail() {
-        return tail;
+    public LinkedListNode get(Integer index) {
+        isOutOfIndex(index);
+        LinkedListNode current = this.head.getNext();
+        int startIndex = 0;
+
+        while (startIndex != index) {
+            current = current.getNext();
+            startIndex++;
+        }
+        return current;
     }
 
-    public void setTail(Node tail) {
-        this.tail = tail;
+    public LinkedListNode remove(Integer index) {
+        isOutOfIndex(index);
+        LinkedListNode current = this.head.getNext();
+        int startIndex = 0;
+        while (startIndex != index) {
+            current = current.getNext();
+            startIndex++;
+        }
+
+        current.getPrev().setNext(current.getNext());
+        current.getNext().setPrev(current.getPrev());
+
+        return current;
     }
 
     @Override
