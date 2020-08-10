@@ -22,7 +22,7 @@ public class HashTable {
         int hashAddress = getHashAddress(key);
 
         Node newNode = new Node(data, value);
-        this.bucket[hashAddress].add(newNode);
+//        this.bucket[hashAddress].add(newNode);
         return value;
     }
 
