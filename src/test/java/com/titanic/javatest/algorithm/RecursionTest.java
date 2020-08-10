@@ -18,7 +18,7 @@ public class RecursionTest {
         this.recursion = new Recursion();
     }
 
-    private static Stream<Arguments> setUpInputs() {
+    private static Stream<Arguments> setUpSumList() {
         return Stream.of(
                 Arguments.of(new int[]{1,2,3}, 6),
                 Arguments.of(new int[]{4,5,6}, 15)
@@ -26,8 +26,22 @@ public class RecursionTest {
     }
 
     @ParameterizedTest
-    @MethodSource("setUpInputs")
+    @MethodSource("setUpSumList")
     void sumList를_테스트한다 (int[] numbers, int expected) {
         assertThat(this.recursion.sumList(numbers)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> setUpPalindrome() {
+        return Stream.of(
+                Arguments.of("level"),
+                Arguments.of("ata")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("setUpPalindrome")
+    void palindrome을_테스트한다(String word) {
+        assertThat(this.recursion.palindrome(word)).isTrue();
+
     }
 }
