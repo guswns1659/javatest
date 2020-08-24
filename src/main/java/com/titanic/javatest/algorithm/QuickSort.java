@@ -15,11 +15,11 @@ public class QuickSort {
         List<Integer> right = new ArrayList<>();
 
         for (int index = 1; index < unsorted.size(); index++) {
-            int data = unsorted.get(index);
-            if (pivot > data) {
-                left.add(data);
+            int number = unsorted.get(index);
+            if (number < pivot) {
+                left.add(number);
             } else {
-                right.add(data);
+                right.add(number);
             }
         }
 
