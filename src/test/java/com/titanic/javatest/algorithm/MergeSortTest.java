@@ -24,6 +24,6 @@ public class MergeSortTest {
     @Test
     void 병합정렬을_테스트한다() {
         System.out.println(this.unsortedList);
-        System.out.println(this.mergeSort.sort(this.unsortedList));
+        System.out.println(this.mergeSort.mergeSplit(this.unsortedList));
     }
 }
