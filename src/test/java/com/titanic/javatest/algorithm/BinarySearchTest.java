@@ -41,7 +41,7 @@ public class BinarySearchTest {
     void tearDown() {
         endTime = System.nanoTime();
         long convert = TimeUnit.MILLISECONDS.convert((endTime - startTime), TimeUnit.NANOSECONDS);
-        System.out.println("time : " + convert);
+        System.out.println("convert = " + convert);
     }
 
 }
