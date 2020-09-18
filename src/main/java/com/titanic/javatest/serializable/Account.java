@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 public class Account implements Serializable {
 
-    private String name;
+    private transient String name;
     private String phoneNumber;
     private int age;
 
