@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Getter
 public class Account implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private transient String name;
     private String phoneNumber;
     private int age;
