@@ -5,24 +5,19 @@ import java.util.Base64;
 
 public class Serializer {
 
-    public static void main(String[] args) {
-
-
-    }
-
-    public String serialize(Account account) {
+    public String serialize(Object object) {
         /*
          * 자바 직렬화 : ObjectOutputStream을 이용한다
          */
-        byte[] serializedAccount;
+        byte[] serialized;
 
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             try (ObjectOutputStream oos = new ObjectOutputStream(baos)) {
-                oos.writeObject(account);
-                serializedAccount = baos.toByteArray();
+                oos.writeObject(object);
+                serialized = baos.toByteArray();
 
                 // 바이트로 변환된 (직렬화된) 결과를 String으로 인코딩
-                return Base64.getEncoder().encodeToString(serializedAccount);
+                return Base64.getEncoder().encodeToString(serialized);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,18 +25,20 @@ public class Serializer {
         }
     }
 
-    public Account deserialize(byte[] serializedAccount) {
+    public Object deserialize(String serialized) {
         /*
          * 자바 역직렬화 : ObjectInputStream을 이용한다.
          */
-        try (ByteArrayInputStream bais = new ByteArrayInputStream(serializedAccount)) {
+        byte[] serializedSingleton = Base64.getDecoder().decode(serialized);
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(serializedSingleton)) {
             try (ObjectInputStream ois = new ObjectInputStream(bais)) {
                 Object objectAccount = ois.readObject();
-                return (Account) objectAccount;
+                return objectAccount;
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

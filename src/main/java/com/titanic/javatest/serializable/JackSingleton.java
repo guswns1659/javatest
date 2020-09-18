@@ -11,4 +11,8 @@ public class JackSingleton implements Serializable {
     public static JackSingleton getInstance() {
         return INSTANCE;
     }
+
+    private Object readResolve() {
+        return INSTANCE;
+    }
 }

@@ -28,11 +28,9 @@ public class SerializableTest {
 
     @Test
     void deserialize를_테스트한다() {
-        // given
-        byte[] serializedAccount = Base64.getDecoder().decode(serializedResult);
 
         // when
-        Account deserializeAccount = serializer.deserialize(serializedAccount);
+        Account deserializeAccount = (Account) serializer.deserialize(serializedResult);
         assertThat(deserializeAccount).isInstanceOf(Account.class);
         System.out.println(deserializeAccount);
     }
