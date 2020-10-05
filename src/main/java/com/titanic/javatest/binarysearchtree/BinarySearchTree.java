@@ -87,8 +87,10 @@ public class BinarySearchTree {
         // 2. 삭제하는 노드의 자식이 1개인 경우
         // 2-1 삭제하는 노드의 자식이 왼쪽 노드인 경우
         if (current.getLeft() != null && current.getRight() == null) {
+            // 삭제하는 노드가 부모 노드의 왼쪽에 있는 경우
             if (current.getValue() < parent.getValue()) {
                 parent.setLeft(current.getLeft());
+            // 삭제하는 노드가 부모 노드의 오른쪽에 있는 경우
             } else {
                 parent.setRight(current.getLeft());
             }
