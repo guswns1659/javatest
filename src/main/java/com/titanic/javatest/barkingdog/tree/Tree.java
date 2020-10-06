@@ -21,7 +21,23 @@ public class Tree {
         parent = new int[6];
         depth = new int[6];
         dfs(1);
+        parent = new int[6];
+        depth = new int[6];
+        recursiveDfs(1);
         System.out.println(Arrays.toString(depth));
+    }
+
+    /**
+     * dfs만 재귀를 하는 이유는 다음 탐색을 자식노드로 하기 때문에 재귀 구조가 가능하다.
+     */
+    private static void recursiveDfs(int node) {
+        System.out.println(node);
+        for (int next : tree.get(node)) {
+            if (parent[node] == next) continue;
+            parent[next] = node;
+            depth[next] = depth[node] + 1;
+            recursiveDfs(next);
+        }
     }
 
     private static void dfs(int root) {
