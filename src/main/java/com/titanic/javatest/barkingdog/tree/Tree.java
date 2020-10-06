@@ -23,7 +23,7 @@ public class Tree {
         dfs(1);
         parent = new int[6];
         depth = new int[6];
-        recursiveDfs(1);
+        recursiveDfs(1,0);
         System.out.println(Arrays.toString(depth));
     }
 
@@ -37,6 +37,14 @@ public class Tree {
             parent[next] = node;
             depth[next] = depth[node] + 1;
             recursiveDfs(next);
+        }
+    }
+
+    private static void recursiveDfs(int current, int parent) {
+        System.out.println(current);
+        for (int next : tree.get(current)) {
+            if (parent == next) continue;
+            recursiveDfs(next, current);
         }
     }
 
@@ -71,5 +79,4 @@ public class Tree {
             }
         }
     }
-
 }
