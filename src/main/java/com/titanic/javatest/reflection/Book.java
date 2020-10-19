@@ -1,34 +1,24 @@
 package com.titanic.javatest.reflection;
 
-@MyAnnotation("jack")
 public class Book {
 
-    private static String B = "BOOK";
-    private static final String C = "BOOK";
+    public static String A = "A";
 
-    private String a;
-    public String d = "d";
-    protected String e = "e";
+    private String B = "B";
 
     public Book() {
     }
 
-    public Book(String a, String d, String e) {
-        this.a = a;
-        this.d = d;
-        this.e = e;
+    public Book(String b) {
+        B = b;
     }
 
-    private void f() {
-        System.out.println("F");
+    private void c() {
+        System.out.println("C");
     }
 
-    public void g() {
-        System.out.println("g");
-    }
-
-    public int h() {
-        return 100;
+    public int sum(int left, int right) {
+        return left + right;
     }
 }
 
