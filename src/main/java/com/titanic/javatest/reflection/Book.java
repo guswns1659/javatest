@@ -1,5 +1,6 @@
 package com.titanic.javatest.reflection;
 
+@MyAnnotation("jack")
 public class Book {
 
     private static String B = "BOOK";
@@ -30,3 +31,5 @@ public class Book {
         return 100;
     }
 }
+
+
