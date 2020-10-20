@@ -13,7 +13,9 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.1.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     // 스케쥴링을 위한 의존성 추가. 부트 2.3.4에 맞는 버전인데 현재 2.3.1이라서 잘 될 지는 의
