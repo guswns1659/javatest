@@ -8,18 +8,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContainerServiceTest {
 
-    @DisplayName("리플랙션 이용한 BookRepository 객체 생성 테스트")
+    @DisplayName("리플랙션 이용해서 ShoeService에 필드 주입 테스트")
     @Test
-    public void getObject_BookRepository() {
-        BookRepository bookRepository = ContainerService.createInstance(BookRepository.class);
-        assertThat(bookRepository).isNotNull();
+    void getObject_ShoeService() {
+        ShoeService shoeService = ContainerService.getObject(ShoeService.class);
+        assertThat(shoeService).isNotNull();
+        assertThat(shoeService.shoeRepository).isNotNull();
     }
 
-    @DisplayName("BookRepository를 필드로 가지고 있는 BookService의 의존성 주입 테스트")
+    @DisplayName("리플랙션 이용해서 ShoeRepository 객체 생성 테스트")
     @Test
-    public void getObject_BookService() {
-        BookService bookService = ContainerService.getObject(BookService.class);
-        assertThat(bookService).isNotNull();
-        assertThat(bookService.bookRepository).isNotNull();
+    void getInstance_ShoeRepository() throws IllegalAccessException {
+        ShoeRepository shoeRepository = ContainerService.createInstance(ShoeRepository.class);
+        assertThat(shoeRepository).isNotNull();
     }
 }
