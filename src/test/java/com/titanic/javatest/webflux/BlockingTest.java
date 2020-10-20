@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
@@ -56,7 +57,25 @@ public class BlockingTest {
 
     @DisplayName("Non-Blocking 테스트")
     @Test
-    void nonBlocking() {
+    void nonBlocking() throws InterruptedException {
 
+        final StopWatch jackWatch = new StopWatch();
+        jackWatch.start();
+
+        for (int loop = 0; loop < LOOP_COUNT; loop++) {
+            webClient.get()
+                    .uri(THREE_SECOND_URL)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .subscribe(it -> {
+                        count.countDown();
+                        System.out.println(it);
+                    });
+        }
+
+        // count가 zero가 될 때까지 기다린다. 여기선 10초
+        count.await(10, TimeUnit.SECONDS);
+        jackWatch.stop();
+        log.info("Total Time : {}", jackWatch.getTotalTimeSeconds());
     }
 }

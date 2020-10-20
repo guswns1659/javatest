@@ -13,6 +13,7 @@ public class threeSecondController {
     @GetMapping("/3second")
     public String threeSecond() throws InterruptedException {
         Thread.sleep(3000);
+        // 요청올 때마다 1씩 추가
         return "success - " + atomicInteger.incrementAndGet();
     }
 }
