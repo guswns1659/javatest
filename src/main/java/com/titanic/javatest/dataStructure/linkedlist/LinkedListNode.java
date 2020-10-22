@@ -34,7 +34,7 @@ public class LinkedListNode {
         this.next = next;
     }
 
-    public boolean isTail() {
+    public boolean isNotTail() {
         return this.value != null;
     }
 }

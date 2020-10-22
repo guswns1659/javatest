@@ -15,7 +15,7 @@ public class DoublyLinkedList {
 
     public void traverse() {
         LinkedListNode node = this.head.getNext();
-        while (node.isTail()) {
+        while (node.isNotTail()) {
             System.out.println("node : " + node.getValue());
             node = node.getNext();
         }
