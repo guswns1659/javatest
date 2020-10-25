@@ -1,7 +1,7 @@
 package com.titanic.javatest.dataStructure.hashtable;
 
 import com.titanic.javatest.dataStructure.linkedlist.DoublyLinkedList;
-import com.titanic.javatest.dataStructure.linkedlist.Node;
+import com.titanic.javatest.dataStructure.linkedlist.LinkedListNode;
 
 import java.util.Arrays;
 
@@ -21,8 +21,8 @@ public class HashTable {
         int key = getKey(data);
         int hashAddress = getHashAddress(key);
 
-        Node newNode = new Node(data, value);
-//        this.bucket[hashAddress].add(newNode);
+        LinkedListNode newNode = new LinkedListNode(Integer.parseInt(value));
+        this.bucket[hashAddress].add(newNode);
         return value;
     }
 
