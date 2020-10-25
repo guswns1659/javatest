@@ -1,41 +1,56 @@
 package com.titanic.javatest.dataStructure.hashtable;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
+@DisplayName("해시테이블 테스트")
 public class HashTableTest {
 
     private HashTable hashTable;
 
+    @DisplayName("해시테이블 생성")
     @BeforeEach
-    void 체이닝을_적용한_해시테이블을_생성한다() {
-        this.hashTable = new HashTable();
+    public void setUp() {
+        hashTable = new HashTable(10);
+        hashTable.put("Jack", "Hyunjun");
     }
 
+    @DisplayName("해시테이블 put() 테스트")
     @ParameterizedTest
-    @CsvSource({"Jack, 177, Jack, 160"})
-    void 해시테이블의_put을_테스트한다(String person, String height, String person2, String height2) {
-        assertThat(hashTable.put(person, height)).isEqualTo(height);
-        assertThat(hashTable.put(person2, height2)).isEqualTo(height2);
-        this.hashTable.traverse();
+    @CsvSource({"Jack,hyunjun,1"})
+    public void put(String key, String value, int expectedSize) {
+        // when
+        hashTable.put(key, value);
+
+        // then
+        assertAll(
+                () -> assertThat(hashTable.size).isEqualTo(expectedSize),
+                () -> assertThat(hashTable.get(key)).isEqualTo(value)
+        );
     }
 
+    @DisplayName("해시테이블 get() 호출 시 key가 있는 테스트")
+    @ParameterizedTest
+    @CsvSource({"Jack,Hyunjun"})
+    public void getSuccess(String key, String expectedValue) {
+        // when
+        String value = hashTable.get(key);
+
+        // then
+        assertThat(value).isEqualTo(expectedValue);
+    }
+
+    @DisplayName("해시테이블 get() 호출 시 key가 없는 테스트")
     @ParameterizedTest
     @CsvSource({"jack"})
-    void 해시256함수를_테스트한다(String name) throws NoSuchAlgorithmException {
-        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-        byte[] hash = messageDigest.digest(name.getBytes(StandardCharsets.UTF_8));
-        String shaHash = new String(hash, StandardCharsets.UTF_8);
-        System.out.println("shaHash : " + shaHash);
-
-        String hex = "100";
-        System.out.println(Integer.parseInt(hex, 2));
+    public void getFail(String key) {
+        // when, then
+        assertThat(hashTable.get(key)).isNull();
     }
 }

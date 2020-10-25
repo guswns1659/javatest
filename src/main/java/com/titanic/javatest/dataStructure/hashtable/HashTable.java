@@ -1,60 +1,64 @@
 package com.titanic.javatest.dataStructure.hashtable;
 
-import com.titanic.javatest.dataStructure.linkedlist.DoublyLinkedList;
-import com.titanic.javatest.dataStructure.linkedlist.LinkedListNode;
-
-import java.util.Arrays;
+import java.util.LinkedList;
 
 public class HashTable {
 
-    private DoublyLinkedList[] bucket;
+    public LinkedList<Node>[] bucket;
+    public int size;
 
-    public HashTable() {
-        this.bucket = new DoublyLinkedList[10];
+    public HashTable(int size) {
+        bucket = new LinkedList[size];
+    }
 
-        for (int i = 0; i < 10; i++) {
-            this.bucket[i] = new DoublyLinkedList();
+    public void put(String key, String value) {
+        int hash = getHash(key);
+        LinkedList<Node> list = bucket[hash];
+
+        // 해당 key의 데이터가 있는지 확인하는 작업 추가
+        Node node = searchNode(list, key);
+        if (node == null) {
+            if (list == null) {
+                list = new LinkedList<>();
+                bucket[hash] = list;
+            }
+
+            list.addLast(new Node(key, value));
+            size++;
+        } else {
+            node.changeValue(value);
         }
     }
 
-    public String put(String data, String value) {
-        int key = getKey(data);
-        int hashAddress = getHashAddress(key);
-
-        LinkedListNode newNode = new LinkedListNode(Integer.parseInt(value));
-        this.bucket[hashAddress].add(newNode);
-        return value;
+    public String get(String key) {
+        int hash = getHash(key);
+        LinkedList<Node> list = bucket[hash];
+        Node node = searchNode(list, key);
+        return (node != null) ? node.value : null;
     }
 
-    public void traverse() {
-        Arrays.stream(bucket).forEach(System.out::println);
-    }
-
-    private int getHashAddress(int key) {
-        return key % this.bucket.length;
-    }
-
-    private int getKey(String data) {
-        char[] charArray = data.toCharArray();
-        int key = 0;
-        for (char character : charArray) {
-            key += character;
+    private Node searchNode(LinkedList<Node> list, String key) {
+        // 해당 리스트가 없다면
+        if (list == null) {
+            return null;
         }
-        return key;
+
+        // key가 없다면 null을 리턴한다
+        for (Node node : list) {
+            if (node.key.equals(key)) {
+                return node;
+            }
+        }
+        return null;
     }
 
-    public DoublyLinkedList[] getBucket() {
-        return bucket;
+    private int getHash(String key) {
+        // 모든 문자열을 더한 뒤 버킷사이즈로 나눈다
+        char characterSum = ' ';
+        for (char character : key.toCharArray()) {
+            characterSum += character;
+        }
+        return characterSum % bucket.length;
     }
 
-    public void setBucket(DoublyLinkedList[] bucket) {
-        this.bucket = bucket;
-    }
-
-    @Override
-    public String toString() {
-        return "HashTable{" +
-                "bucket=" + Arrays.toString(bucket) +
-                '}';
-    }
 }
