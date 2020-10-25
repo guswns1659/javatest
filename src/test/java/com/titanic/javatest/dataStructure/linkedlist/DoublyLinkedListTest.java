@@ -1,6 +1,8 @@
 package com.titanic.javatest.dataStructure.linkedlist;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,6 +20,13 @@ public class DoublyLinkedListTest {
             LinkedListNode newNode = new LinkedListNode(i);
             this.doublyLinkedList.add(newNode);
         }
+    }
+
+    @DisplayName("링크드리스트의 traverse테스트")
+    @Test
+    void traverse() {
+        // when
+        doublyLinkedList.traverse();
     }
 
     @CsvSource({"13, 3, 33, 11"})
