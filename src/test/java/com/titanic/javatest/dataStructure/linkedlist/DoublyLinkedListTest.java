@@ -2,60 +2,56 @@ package com.titanic.javatest.dataStructure.linkedlist;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
+@DisplayName("링크드리스트 테스트")
 public class DoublyLinkedListTest {
 
     private DoublyLinkedList doublyLinkedList;
 
+    @DisplayName("링크드리스트 생성")
     @BeforeEach
-    void 양방향링크드리스트를_생성한다() {
-        this.doublyLinkedList = new DoublyLinkedList();
-        for (int i = 1; i < 10; i++) {
-            LinkedListNode newNode = new LinkedListNode(i);
-            this.doublyLinkedList.add(newNode);
+    public void setUp() {
+        doublyLinkedList = new DoublyLinkedList();
+        for (int value = 1; value < 11; value++) {
+            doublyLinkedList.add(new LinkedListNode(value));
         }
     }
 
-    @DisplayName("링크드리스트의 traverse테스트")
-    @Test
-    void traverse() {
+    @DisplayName("링크드리스트 add() 테스트")
+    @ParameterizedTest
+    @CsvSource({"10"})
+    public void add(int expectedSize) {
+        // then
+        assertThat(doublyLinkedList.size).isEqualTo(expectedSize);
+    }
+
+    @DisplayName("링크드리스트 get() 테스트")
+    @ParameterizedTest
+    @CsvSource({"9,10"})
+    public void get(int index, int expectedValue) {
         // when
-        doublyLinkedList.traverse();
+        LinkedListNode foundNode = doublyLinkedList.get(index);
+
+        // then
+        assertThat(foundNode.value).isEqualTo(expectedValue);
     }
 
-    @CsvSource({"13, 3, 33, 11"})
+    @DisplayName("링크드리스트 remove() 테스트")
     @ParameterizedTest
-    void 양방향링크드리스트의_add를_테스트한다(Integer value, Integer index, Integer value2, Integer eleven) {
+    @CsvSource({"7,8,9"})
+    public void remove(int index, int expectedValue, int expectedSize) {
+        // when
+        LinkedListNode removedNode = doublyLinkedList.remove(index);
 
-        doublyLinkedList.traverse();
-        assertThat(doublyLinkedList.add(new LinkedListNode(value))).isTrue();
-        assertThat(doublyLinkedList.add(index, new LinkedListNode(value2))).isTrue();
-        assertThat(doublyLinkedList.size()).isEqualTo(eleven);
-        assertThatThrownBy(() -> doublyLinkedList.add(15, new LinkedListNode(value2)))
-                .isInstanceOf(IndexOutOfBoundsException.class);
-        doublyLinkedList.traverse();
-    }
-
-    @CsvSource({"3, 4, 5"})
-    @ParameterizedTest
-    void 양방향링크드리스트의_get을_테스트한다(Integer three, Integer four, Integer five) {
-
-        assertThat(doublyLinkedList.get(three).getValue()).isEqualTo(four);
-        assertThat(doublyLinkedList.get(four).getValue()).isEqualTo(five);
-        assertThatThrownBy(() -> doublyLinkedList.get(15)).isInstanceOf(IndexOutOfBoundsException.class);
-    }
-
-    @CsvSource({"3, 4"})
-    @ParameterizedTest
-    void 양방향링크드리스트의_remove을_테스트한다(Integer index, Integer four) {
-        doublyLinkedList.traverse();
-        assertThat(doublyLinkedList.remove(index).getValue()).isEqualTo(four);
-        doublyLinkedList.traverse();
+        // then
+        assertAll(
+                () -> assertThat(removedNode.value).isEqualTo(expectedValue),
+                () -> assertThat(doublyLinkedList.size).isEqualTo(expectedSize)
+        );
     }
 }

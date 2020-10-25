@@ -2,95 +2,52 @@ package com.titanic.javatest.dataStructure.linkedlist;
 
 public class DoublyLinkedList {
 
-    private LinkedListNode head;
-    private LinkedListNode tail;
-    private int size;
+    public LinkedListNode head;
+    public LinkedListNode tail;
+    public int size;
 
-    public DoublyLinkedList () {
-        this.head = new LinkedListNode(null);
-        this.tail = new LinkedListNode(null);
-        this.head.setNext(this.tail);
-        this.tail.setPrev(this.head);
+    public DoublyLinkedList() {
+        head = new LinkedListNode(null);
+        tail = new LinkedListNode(null);
+        head.next = tail;
+        tail.prev = head;
     }
 
-    public void traverse() {
-        LinkedListNode node = this.head.getNext();
-        while (node.isNotTail()) {
-            System.out.println("node : " + node.getValue());
-            node = node.getNext();
-        }
-        System.out.println();
+    public void add(LinkedListNode newNode) {
+        LinkedListNode current = tail;
+        // 링크 조절
+        newNode.prev = current.prev;
+        newNode.next = current;
+        current.prev.next = newNode;
+        current.prev = newNode;
+        size++;
     }
 
-    public boolean add(LinkedListNode newNode) {
-        LinkedListNode current = this.tail;
-        arrangeLink(newNode, current);
-        this.size++;
-        return true;
+    public LinkedListNode get(int findingIndex) {
+        return findingNode(findingIndex);
     }
 
-    private void arrangeLink(LinkedListNode newNode, LinkedListNode current) {
-        newNode.setPrev(current.getPrev());
-        newNode.setNext(current);
-        current.getPrev().setNext(newNode);
-        current.setPrev(newNode);
+    public LinkedListNode remove(int findingIndex) {
+        LinkedListNode current = findingNode(findingIndex);
+
+        // 삭제할 노드의 링크 조정
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+        size--;
+        return current;
     }
 
-    public boolean add(int index, LinkedListNode newNode) {
-        isOutOfIndex(index);
-        LinkedListNode current = this.head.getNext();
-        int startIndex = 0;
-        while (startIndex != index) {
-            current = current.getNext();
-            startIndex++;
-        }
-        arrangeLink(newNode, current);
-        this.size++;
-        return true;
-    }
-
-    private void isOutOfIndex(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    public int size() {
-        return this.size;
-    }
-
-    public LinkedListNode get(Integer index) {
-        isOutOfIndex(index);
-        LinkedListNode current = this.head.getNext();
-        int startIndex = 0;
-
-        while (startIndex != index) {
-            current = current.getNext();
-            startIndex++;
+    private LinkedListNode findingNode(int findingIndex) {
+        LinkedListNode current = head.next;
+        int index = 0;
+        while (isFindingIndex(findingIndex, index)) {
+            current = current.next;
+            index++;
         }
         return current;
     }
 
-    public LinkedListNode remove(Integer index) {
-        isOutOfIndex(index);
-        LinkedListNode current = this.head.getNext();
-        int startIndex = 0;
-        while (startIndex != index) {
-            current = current.getNext();
-            startIndex++;
-        }
-
-        current.getPrev().setNext(current.getNext());
-        current.getNext().setPrev(current.getPrev());
-
-        return current;
-    }
-
-    @Override
-    public String toString() {
-        return "DoublyLinkedList{" +
-                "head=" + head +
-                ", tail=" + tail +
-                '}';
+    private boolean isFindingIndex(int findingIndex, int index) {
+        return index != findingIndex;
     }
 }
