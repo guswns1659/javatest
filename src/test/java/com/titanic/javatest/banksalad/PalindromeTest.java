@@ -16,12 +16,11 @@ public class PalindromeTest {
     public void setUp() {
         palindrome = new Palindrome();
     }
-
     @DisplayName("palindrome solution 테스트")
     @ParameterizedTest
     @CsvSource({"ab"})
     public void solution(String input) {
         //given when, then
-        assertThat(palindrome.solution(input)).isTrue();
+        assertThat(palindrome.solution(input)).isFalse();
     }
 }

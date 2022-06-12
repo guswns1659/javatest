@@ -40,12 +40,6 @@ public class BinarySearchTreeTest {
         }
     }
 
-    @Test
-    void 이진탐색트리의_delete를_테스트한다() {
-        assertThat(this.binarySearchTree.delete(new TreeNode(3))).isTrue();
-        assertThat(this.binarySearchTree.delete(new TreeNode(7))).isTrue();
-    }
-
     @CsvSource({"500, 100"})
     @ParameterizedTest
     void 이진탐색트리의_size를_테스트한다(Integer number1, Integer size) {

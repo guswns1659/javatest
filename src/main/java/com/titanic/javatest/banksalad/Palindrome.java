@@ -1,7 +1,6 @@
 package com.titanic.javatest.banksalad;
 
 public class Palindrome {
-
     public boolean solution(String input) {
         // middle 초기화
         int middle = 0;

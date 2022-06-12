@@ -13,5 +13,6 @@ class OperationTest {
         String operator = "+";
 
         assertThat(Operation.fromString(operator).orElseThrow(() -> new RuntimeException()).apply(x,y)).isEqualTo(7);
+
     }
 }
