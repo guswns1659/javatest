@@ -2,10 +2,7 @@ package com.titanic.javatest.completablefuture;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeoutException;
+import java.util.concurrent.*;
 
 class CompletableFutureTest {
     private static final int sleepA = 3;
@@ -20,11 +17,11 @@ class CompletableFutureTest {
         CompletableFuture.allOf(
                 CompletableFuture.supplyAsync(
                         () -> select(payAccountId), executorService
-                ).thenAccept(this::insert),
+                ),
 
                 CompletableFuture.supplyAsync(
                         () -> select2(payAccountId), executorService
-                ).thenAccept(this::insert2)
+                )
         ).join();
 
         // send completed kafka
@@ -33,15 +30,22 @@ class CompletableFutureTest {
 
     @Test
     void fail() {
-        CompletableFuture.allOf(
-                CompletableFuture.supplyAsync(
-                        () -> selectWithTimeout(payAccountId)
-                ).thenAccept(this::insert),
+        try {
+            CompletableFuture.allOf(
+                    CompletableFuture.supplyAsync(
+                            () -> select(payAccountId)
+                    ),
 
-                CompletableFuture.supplyAsync(
-                        () -> select2(payAccountId)
-                ).thenAccept(this::insert2)
-        ).join();
+                    CompletableFuture.supplyAsync(
+                            () -> select2(payAccountId)
+                    )
+            ).join();
+            // 성공 메세지 produce
+
+        } catch (CompletionException | CancellationException e) {
+            // logging or 다른 작업?
+
+        }
     }
 
     private long selectWithTimeout(long payAccountId) {
